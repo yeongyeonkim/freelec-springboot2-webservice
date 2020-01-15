@@ -1,5 +1,5 @@
 buildscript {
-    ext{ // build.gradle에서 사용하는 전역변수를 설정.
+    ext {
         springBootVersion = '2.1.7.RELEASE'
     }
     repositories {
@@ -20,12 +20,15 @@ group 'com.jojoldu.book'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
-repositories { // 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 정한다.
+repositories {
     mavenCentral()
     jcenter()
 }
 
-dependencies { // 프로젝트 개발에 필요한 의존성들을 선언하는 곳.
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.h2database:h2')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
