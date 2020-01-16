@@ -7,6 +7,7 @@ import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+// api 요청을 받을 Controller.
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {

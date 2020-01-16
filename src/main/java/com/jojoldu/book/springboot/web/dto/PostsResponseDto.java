@@ -3,6 +3,7 @@ package com.jojoldu.book.springboot.web.dto;
 import com.jojoldu.book.springboot.domain.posts.Posts;
 import lombok.Getter;
 
+// Request 데이터를 받을 Dto. (vo와 비슷)
 @Getter
 public class PostsResponseDto {
     private Long id;

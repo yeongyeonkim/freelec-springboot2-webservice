@@ -10,27 +10,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+//트랜잭션, 도메인 기능 간의 순서를 보장하는 Service
 @RequiredArgsConstructor
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
 
-    @Transactional
+    @Transactional //save
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
-
-    @Transactional
+    /*
+        .orElseThrow를 통해서 nullpointer를 방지한다.
+        IllegalArgumentException 로 예외처리.
+     */
+    @Transactional //update
     public Long update(Long id, PostsUpdateRequestDto requestDto){
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id="+ id));
         posts.update(requestDto.getTitle(), requestDto.getContent());
         return id;
     }
-
+    // id search
+    @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id) {
-        Posts entity = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id="+id));
+        Posts entity = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id="+id));
         return new PostsResponseDto(entity);
     }
 }
